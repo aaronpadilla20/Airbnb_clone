@@ -12,6 +12,9 @@ const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
 const avif = require('gulp-avif');
 
+//build
+const build = require('gulp-build');
+
 function css( done ) {
     src('src/scss/app.scss')
         .pipe( sourcemaps.init() )
@@ -47,10 +50,18 @@ function versionAvif() {
         .pipe( dest('build/img'))
 }
 
+function construye(){
+    return src('./*.html')
+        .pipe(build({ GA_ID: '123456' }))
+        .pipe(dest('build'))
+}
+
 function dev() {
     watch( 'src/scss/**/*.scss', css );
     watch( 'src/img/**/*', imagenes );
 }
+
+
 
 
 exports.css = css;
@@ -58,4 +69,5 @@ exports.dev = dev;
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
-exports.default = series( imagenes, versionWebp, versionAvif, css, dev  );
+exports.construye = construye;
+exports.default = series( imagenes, versionWebp, versionAvif, css, construye, dev  );
