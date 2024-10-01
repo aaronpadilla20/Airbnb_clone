@@ -52,8 +52,14 @@ function versionAvif() {
 
 function construye(){
     return src('./*.html')
-        .pipe(build({ GA_ID: '123456' }))
-        .pipe(dest('build'))
+        .pipe(build())
+        .pipe(dest('production'))
+        .pipe(src('build/css/*.{css,map}'))
+        .pipe(build())
+        .pipe(dest('production/css'))
+        .pipe(src('build/img/.{avif,webp,jpg}'))
+        .pipe(build())
+        .pipe(dest('production/img'))
 }
 
 function dev() {
