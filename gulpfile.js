@@ -50,18 +50,6 @@ function versionAvif() {
         .pipe( dest('build/img'))
 }
 
-function construye(){
-    return src('./*.html')
-        .pipe(build())
-        .pipe(dest('production'))
-        .pipe(src('build/css/*.{css,map}'))
-        .pipe(build())
-        .pipe(dest('production/css'))
-        .pipe(src('build/img/.{avif,webp,jpg}'))
-        .pipe(build())
-        .pipe(dest('production/img'))
-}
-
 function dev() {
     watch( 'src/scss/**/*.scss', css );
     watch( 'src/img/**/*', imagenes );
